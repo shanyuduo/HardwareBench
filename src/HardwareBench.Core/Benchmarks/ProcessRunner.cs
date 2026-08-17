@@ -37,7 +37,15 @@ public sealed class BoundedProcessRunner : IProcessRunner
 
         using var job = new JobObjectScope();
         proc.Start();
-        job.AssignProcess(proc.Handle);
+        try
+        {
+            job.AssignProcess(proc.Handle);
+        }
+        catch
+        {
+            try { proc.Kill(entireProcessTree: true); } catch { }
+            throw;
+        }
 
         var stdoutTask = proc.StandardOutput.ReadToEndAsync();
         var stderrTask = proc.StandardError.ReadToEndAsync();
