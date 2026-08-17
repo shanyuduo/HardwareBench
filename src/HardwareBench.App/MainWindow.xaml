@@ -9,6 +9,9 @@
         <DataTemplate DataType="{x:Type vm:DetectionViewModel}">
             <views:DetectionPage/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:BenchmarkViewModel}">
+            <views:BenchmarkPage/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:PlaceholderViewModel}">
             <views:PlaceholderPage/>
         </DataTemplate>
