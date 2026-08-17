@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="HardwareBench.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Hardware.Info" Version="110.0.0.1" />
   </ItemGroup>
 

@@ -90,4 +90,13 @@ public class ToolExtractorTests
         Assert.Contains("HardwareBench.Tools.7ZIP-LICENSE.txt", names);
         Assert.Contains("HardwareBench.Tools.DISKSPD-LICENSE.txt", names);
     }
+
+    [Fact]
+    public void AllExpectedHashes_AreExactly64LowercaseHexChars()
+    {
+        var pattern = new System.Text.RegularExpressions.Regex("^[0-9a-f]{64}$");
+        foreach (var kv in ToolHashes.Expected)
+            Assert.True(pattern.IsMatch(kv.Value),
+                $"Hash for {kv.Key} is not 64 lowercase hex chars: got '{kv.Value}' ({kv.Value.Length} chars)");
+    }
 }

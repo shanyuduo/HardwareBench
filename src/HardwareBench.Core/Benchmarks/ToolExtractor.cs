@@ -83,9 +83,9 @@ public class ToolExtractor : IToolLocator
         return finalPath;
     }
 
-    private static bool VerifyHash(string filePath, string toolName)
+    private bool VerifyHash(string filePath, string toolName)
     {
-        if (!ToolHashes.Expected.TryGetValue(toolName, out var expected))
+        if (!_expectedHashes.TryGetValue(toolName, out var expected))
             return false;
         var actual = ComputeHash(File.ReadAllBytes(filePath));
         return string.Equals(actual, expected, StringComparison.OrdinalIgnoreCase);
