@@ -9,7 +9,6 @@ public sealed class DiskSpdEngine : IBenchmarkEngine
     private const string ToolName = "diskspd.exe";
     private const int RunTimeoutMs = 60_000;
     private const int NormalDurationSeconds = 5;
-    private const int WarmupDurationSeconds = 3;
 
     private readonly IToolLocator _tools;
     private readonly IProcessRunner _runner;
@@ -46,28 +45,6 @@ public sealed class DiskSpdEngine : IBenchmarkEngine
                 new MetricValue("disk-4k-read", "MiB/s", rnd.ReadMiBS),
                 new MetricValue("disk-4k-iops", "IOPS", rnd.ReadIops),
             ];
-        }
-        finally
-        {
-            TryDelete(seqFile);
-            TryDelete(rndFile);
-        }
-    }
-
-    public async Task RunWarmupAsync(CancellationToken ct)
-    {
-        ct.ThrowIfCancellationRequested();
-
-        var workDir = Path.Combine(Path.GetTempPath(), "HardwareBench", "work");
-        Directory.CreateDirectory(workDir);
-
-        var seqFile = Path.Combine(workDir, "diskspd-seq.dat");
-        var rndFile = Path.Combine(workDir, "diskspd-4k.dat");
-
-        try
-        {
-            await RunDiskSpdAsync(seqFile, ["-b1M"], WarmupDurationSeconds, ct);
-            await RunDiskSpdAsync(rndFile, ["-b4K", "-r4K"], WarmupDurationSeconds, ct);
         }
         finally
         {

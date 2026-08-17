@@ -7,7 +7,7 @@
 | Microsoft.Extensions.Hosting | MIT | 依赖注入容器 |
 | Microsoft.Win32.Registry (.NET Foundation) | MIT | 注册表 EDID/外设访问 |
 | Microsoft DiskSpd v2.2 | MIT | 磁盘基准引擎（内嵌分发，`assets/tools/diskspd/`） |
-| 7-Zip 7zr.exe | LGPL-2.1（含 unRAR 限制） | CPU 压缩基准引擎（内嵌分发，`assets/tools/7zr/`） |
+| 7-Zip 7zr.exe | LGPL-2.1（含 unRAR 限制） | CPU 压缩基准引擎（内嵌分发，`assets/tools/7zr/`）；源码：https://www.7-zip.org/download.html |
 | STREAM benchmark (John McCalpin) | 自定义许可（允许使用，结果须符合 Run Rules） | 内存带宽基准引擎（内嵌分发，`assets/tools/stream/`） |
 | .NET 运行时与 WPF | MIT | 运行时框架 |
 
