@@ -10,6 +10,7 @@ public sealed class PeripheralRegistryDetector(RegistryPeripheralSource source) 
 
     public Task DetectAsync(HardwareReport report, CancellationToken ct)
     {
+        ct.ThrowIfCancellationRequested();
         report.Peripherals.AddRange(PeripheralParser.Parse(source.ReadAll()));
         return Task.CompletedTask;
     }

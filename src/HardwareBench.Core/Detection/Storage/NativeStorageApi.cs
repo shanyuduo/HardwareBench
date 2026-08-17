@@ -48,7 +48,8 @@ public sealed class NativeStorageApi
         var query = new byte[8 + sizeof(uint) * 3];
         query[0] = (byte)propertyId; query[1] = (byte)(propertyId >> 8);
         query[2] = (byte)(propertyId >> 16); query[3] = (byte)(propertyId >> 24);
-        query[8] = (byte)PropertyStandardDefine;
+        query[4] = (byte)PropertyStandardDefine; query[5] = (byte)(PropertyStandardDefine >> 8);
+        query[6] = (byte)(PropertyStandardDefine >> 16); query[7] = (byte)(PropertyStandardDefine >> 24);
         return DeviceIoControlRead(handle, IoctlStorageQueryProperty, query, size);
     }
 

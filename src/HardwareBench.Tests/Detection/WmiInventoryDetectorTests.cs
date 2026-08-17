@@ -18,13 +18,14 @@ public class WmiInventoryDetectorTests
         public OS? Os { get; set; }
         public bool ThrowCpu { get; set; }
         public bool ThrowMemory { get; set; }
+        public bool ThrowOs { get; set; }
 
         public IEnumerable<CPU> GetCpuList() { if (ThrowCpu) throw new InvalidOperationException("wmi down"); return Cpus; }
         public IEnumerable<Motherboard> GetMotherboardList() => Boards;
         public IEnumerable<Memory> GetMemoryList() { if (ThrowMemory) throw new InvalidOperationException("wmi down"); return Memory; }
         public IEnumerable<VideoController> GetVideoControllerList() => Gpus;
         public IEnumerable<Drive> GetDriveList() => Drives;
-        public OS GetOperatingSystem() => Os!;
+        public OS GetOperatingSystem() => ThrowOs ? throw new InvalidOperationException("wmi down") : Os!;
     }
 
     [Fact]
@@ -55,14 +56,15 @@ public class WmiInventoryDetectorTests
     [Fact]
     public async Task Detect_SectionFailure_RecordsErrorAndContinues()
     {
-        var src = new FakeSource { ThrowCpu = true, ThrowMemory = true };
+        var src = new FakeSource { ThrowCpu = true, ThrowMemory = true, ThrowOs = true };
         var report = new HardwareReport();
 
         await new WmiInventoryDetector(src).DetectAsync(report, CancellationToken.None);
 
         Assert.Null(report.Cpu);
         Assert.Empty(report.MemoryModules);
-        Assert.Equal(2, report.Errors.Count);
-        Assert.Contains(report.Errors, e => e.DetectorId == "wmi.inventory");
+        Assert.Null(report.Os);
+        Assert.Equal(3, report.Errors.Count);
+        Assert.All(report.Errors, e => Assert.Equal("wmi.inventory", e.DetectorId));
     }
 }
