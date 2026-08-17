@@ -10,4 +10,12 @@
     <PackageReference Include="Hardware.Info" Version="110.0.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\assets\tools\diskspd\diskspd.exe" LogicalName="HardwareBench.Tools.diskspd.exe" />
+    <EmbeddedResource Include="..\..\assets\tools\7zr\7zr.exe" LogicalName="HardwareBench.Tools.7zr.exe" />
+    <EmbeddedResource Include="..\..\assets\tools\stream\stream-windows.exe" LogicalName="HardwareBench.Tools.stream-windows.exe" />
+    <EmbeddedResource Include="..\..\assets\tools\7zr\7ZIP-LICENSE.txt" LogicalName="HardwareBench.Tools.7ZIP-LICENSE.txt" />
+    <EmbeddedResource Include="..\..\assets\tools\diskspd\DISKSPD-LICENSE.txt" LogicalName="HardwareBench.Tools.DISKSPD-LICENSE.txt" />
+  </ItemGroup>
+
 </Project>
