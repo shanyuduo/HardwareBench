@@ -8,6 +8,7 @@ public class BenchmarkViewModelTests
     private sealed class FakeService : IBenchmarkService
     {
         public Exception? ToThrow { get; set; }
+        public IReadOnlyList<string>? Warnings { get; set; } = ["测试警告"];
 
         public Task<BenchmarkResult> RunAsync(IProgress<BenchmarkProgress>? progress, CancellationToken ct)
         {
@@ -17,7 +18,7 @@ public class BenchmarkViewModelTests
             return Task.FromResult(new BenchmarkResult
             {
                 StartedAtUtc = DateTimeOffset.UtcNow,
-                Environment = new BenchmarkEnvironment("测试警告", 0, "test"),
+                Environment = new BenchmarkEnvironment("平衡", 0, "test", Warnings),
                 Metrics =
                 {
                     new MetricResult("mem-triad", "Memory", "MB/s", 80000, 1000, [80000, 80000, 80000]),
@@ -73,6 +74,16 @@ public class BenchmarkViewModelTests
         Assert.Equal(512, result.TotalScore);
         Assert.Equal(2, result.Metrics.Count);
         File.Delete(path);
+    }
+
+    [Fact]
+    public async Task Start_NoWarnings_ShowsEnvironmentCheckPassed()
+    {
+        var vm = new BenchmarkViewModel(new FakeService { Warnings = null }, new FakeExporter());
+
+        await vm.StartCommand.ExecuteAsync(null);
+
+        Assert.Equal("环境检查通过", vm.FairnessText);
     }
 
     [Fact]

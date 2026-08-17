@@ -6,7 +6,11 @@ public sealed record MetricResult(string Id, string Category, string Unit, doubl
 
 public sealed record BenchmarkError(string EngineId, string Message);
 
-public sealed record BenchmarkEnvironment(string PowerScheme, double BackgroundCpuPercent, string ToolVersions);
+public sealed record BenchmarkEnvironment(
+    string PowerScheme,
+    double BackgroundCpuPercent,
+    string ToolVersions,
+    IReadOnlyList<string>? Warnings = null);
 
 public sealed class BenchmarkResult
 {

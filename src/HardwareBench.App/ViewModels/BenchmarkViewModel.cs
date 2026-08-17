@@ -85,27 +85,7 @@ public partial class BenchmarkViewModel(
 
     private static string BuildFairnessText(BenchmarkResult result)
     {
-        var warnings = new List<string>();
-        if (result.Environment is { } env)
-        {
-            if (!IsOkScheme(env.PowerScheme))
-                warnings.Add($"电源计划为 {env.PowerScheme}，建议切换到平衡/高性能");
-            if (env.BackgroundCpuPercent > 15)
-                warnings.Add($"后台 CPU 占用 {env.BackgroundCpuPercent:F0}%，建议关闭占用程序后重测");
-        }
-
-        return warnings.Count == 0 ? "环境检查通过" : string.Join("；", warnings);
-    }
-
-    private static bool IsOkScheme(string name)
-    {
-        var normalized = name.Replace(" ", string.Empty);
-        foreach (var keyword in new[] { "平衡", "Balanced", "高性能", "High performance" })
-        {
-            if (normalized.Contains(keyword.Replace(" ", string.Empty), StringComparison.OrdinalIgnoreCase))
-                return true;
-        }
-
-        return false;
+        var warns = result.Environment.Warnings;
+        return warns is { Count: > 0 } ? string.Join("；", warns) : "环境检查通过";
     }
 }

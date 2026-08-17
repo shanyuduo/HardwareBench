@@ -23,7 +23,7 @@ public sealed class BenchmarkService(IEnumerable<IBenchmarkEngine> engines, IFai
         {
             var report = await guard.CheckAsync(ct);
             result.Environment = new BenchmarkEnvironment(
-                report.PowerSchemeName, report.BackgroundCpuPercent, ToolHashes.ToolVersions);
+                report.PowerSchemeName, report.BackgroundCpuPercent, ToolHashes.ToolVersions, report.Warnings);
         }
         catch (OperationCanceledException)
         {
@@ -32,7 +32,7 @@ public sealed class BenchmarkService(IEnumerable<IBenchmarkEngine> engines, IFai
         catch (Exception ex)
         {
             result.Errors.Add(new BenchmarkError("fairness.guard", ex.Message));
-            result.Environment = new BenchmarkEnvironment("未知", -1, ToolHashes.ToolVersions);
+            result.Environment = new BenchmarkEnvironment("未知", -1, ToolHashes.ToolVersions, [$"公平性检查失败：{ex.Message}"]);
         }
 
         foreach (var engine in engines)

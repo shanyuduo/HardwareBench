@@ -125,6 +125,24 @@ public class BenchmarkServiceTests
         Assert.Single(result.Metrics);
         Assert.Equal("未知", result.Environment.PowerScheme);
         Assert.Equal(-1, result.Environment.BackgroundCpuPercent);
+        Assert.Contains("公平性检查失败", result.Environment.Warnings!.Single());
+    }
+
+    [Fact]
+    public async Task RunAsync_GuardWarnings_PropagateToEnvironment()
+    {
+        var engine = new FakeEngine("A", "Memory", 0,
+        [
+            _ => [new MetricValue("mem-triad", "MB/s", 80000)],
+            _ => [new MetricValue("mem-triad", "MB/s", 80000)],
+            _ => [new MetricValue("mem-triad", "MB/s", 80000)],
+        ]);
+        var guard = new FakeGuard(new FairnessReport("平衡", true, 1.0, true, ["测试警告A", "测试警告B"]));
+        var service = new BenchmarkService([engine], guard);
+
+        var result = await service.RunAsync(null, CancellationToken.None);
+
+        Assert.Equal(["测试警告A", "测试警告B"], result.Environment.Warnings);
     }
 
     [Fact]

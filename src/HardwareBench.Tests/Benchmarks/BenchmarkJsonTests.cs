@@ -10,7 +10,7 @@ public class BenchmarkJsonTests
         var result = new BenchmarkResult
         {
             StartedAtUtc = new DateTimeOffset(2026, 8, 17, 14, 30, 0, TimeSpan.Zero),
-            Environment = new BenchmarkEnvironment("Balanced", 2.5, "CPU-Z 2.10; GPU-Z 2.60"),
+            Environment = new BenchmarkEnvironment("Balanced", 2.5, "CPU-Z 2.10; GPU-Z 2.60", ["警告一", "警告二"]),
             Metrics =
             {
                 new MetricResult("cpu.multi", "CPU", "points", 18425.3, 512, [18200.0, 18425.3, 18350.7]),
@@ -27,6 +27,9 @@ public class BenchmarkJsonTests
         Assert.Equal(result.Environment.PowerScheme, back.Environment.PowerScheme);
         Assert.Equal(result.Environment.BackgroundCpuPercent, back.Environment.BackgroundCpuPercent);
         Assert.Equal(result.Environment.ToolVersions, back.Environment.ToolVersions);
+        Assert.Equal(2, back.Environment.Warnings!.Count);
+        Assert.Equal("警告一", back.Environment.Warnings[0]);
+        Assert.Equal("警告二", back.Environment.Warnings[1]);
 
         Assert.Equal(result.Metrics[0].Id, back.Metrics[0].Id);
         Assert.Equal(result.Metrics[0].Category, back.Metrics[0].Category);
@@ -66,5 +69,6 @@ public class BenchmarkJsonTests
         var back = BenchmarkJson.Deserialize(json);
 
         Assert.Null(back.TotalScore);
+        Assert.Null(back.Environment.Warnings);
     }
 }
