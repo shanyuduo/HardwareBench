@@ -1,0 +1,80 @@
+<UserControl x:Class="HardwareBench.App.Views.DetectionPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
+            <Button Content="开始检测" Command="{Binding LoadCommand}"
+                    Padding="16,6" FontWeight="Bold" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"/>
+            <Button Content="导出 JSON" Command="{Binding ExportCommand}" Margin="8,0,0,0" Padding="12,6"
+                    IsEnabled="{Binding HasReport}"/>
+            <TextBlock Text="{Binding StatusText}" VerticalAlignment="Center" Margin="16,0,0,0"/>
+        </StackPanel>
+        <ProgressBar DockPanel.Dock="Top" IsIndeterminate="{Binding IsBusy}" Height="4"/>
+        <ScrollViewer>
+            <StackPanel Margin="0,12,0,0">
+                <TextBlock Text="处理器" FontWeight="Bold" FontSize="16"/>
+                <TextBlock Text="{Binding Report.Cpu.Name}" Margin="0,4" FontSize="14"/>
+                <TextBlock Text="主板" FontWeight="Bold" FontSize="16" Margin="0,12,0,4"/>
+                <TextBlock>
+                    <Run Text="{Binding Report.Motherboard.Manufacturer}"/>
+                    <Run Text=" "/>
+                    <Run Text="{Binding Report.Motherboard.Product}"/>
+                </TextBlock>
+                <TextBlock Text="内存" FontWeight="Bold" FontSize="16" Margin="0,12,0,4"/>
+                <ItemsControl ItemsSource="{Binding Report.MemoryModules}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding DeviceLocator}"/>
+                                <Run Text=" · "/>
+                                <Run Text="{Binding CapacityBytes, StringFormat={}{0:N0} B}"/>
+                                <Run Text=" · "/>
+                                <Run Text="{Binding SpeedMts, StringFormat={}{0} MT/s}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="显卡" FontWeight="Bold" FontSize="16" Margin="0,12,0,4"/>
+                <ItemsControl ItemsSource="{Binding Report.Gpus}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate><TextBlock Text="{Binding Name}"/></DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="存储" FontWeight="Bold" FontSize="16" Margin="0,12,0,4"/>
+                <ItemsControl ItemsSource="{Binding Report.Storage}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding Model}"/><Run Text=" · "/>
+                                <Run Text="{Binding BusType}"/><Run Text=" · "/>
+                                <Run Text="{Binding TemperatureC, StringFormat={}{0} ℃, TargetNullValue=温度未知}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="显示器" FontWeight="Bold" FontSize="16" Margin="0,12,0,4"/>
+                <ItemsControl ItemsSource="{Binding Report.Monitors}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding ModelName, TargetNullValue=(未提供名称)}"/>
+                                <Run Text=" · "/><Run Text="{Binding ManufacturerId}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="外设" FontWeight="Bold" FontSize="16" Margin="0,12,0,4"/>
+                <ItemsControl ItemsSource="{Binding Report.Peripherals}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="["/><Run Text="{Binding Kind}"/><Run Text="] "/>
+                                <Run Text="{Binding Name}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>
