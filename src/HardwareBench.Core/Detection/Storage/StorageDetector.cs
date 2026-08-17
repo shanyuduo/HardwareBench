@@ -4,7 +4,7 @@ using HardwareBench.Core.Models;
 namespace HardwareBench.Core.Detection.Storage;
 
 [SupportedOSPlatform("windows")]
-public sealed class StorageDetector(NativeStorageApi api)
+public sealed class StorageDetector(NativeStorageApi api) : IHardwareDetector
 {
     private static readonly Dictionary<uint, string> BusNames = new()
     {

@@ -3,7 +3,7 @@ using HardwareBench.Core.Models;
 
 namespace HardwareBench.Core.Detection.Monitor;
 
-public sealed class MonitorDetector(IEdidSource source)
+public sealed class MonitorDetector(IEdidSource source) : IHardwareDetector
 {
     public string Id => "monitor.edid";
 

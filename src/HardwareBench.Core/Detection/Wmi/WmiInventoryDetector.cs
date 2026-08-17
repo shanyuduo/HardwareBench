@@ -6,7 +6,7 @@ using Hardware.Info;
 namespace HardwareBench.Core.Detection.Wmi;
 
 [SupportedOSPlatform("windows")]
-public sealed class WmiInventoryDetector(IWmiSource source)
+public sealed class WmiInventoryDetector(IWmiSource source) : IHardwareDetector
 {
     public string Id => "wmi.inventory";
 
