@@ -1,0 +1,8 @@
+<UserControl x:Class="HardwareBench.App.Views.PlaceholderPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <TextBlock Text="{Binding Text}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="18" Foreground="#888"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="App.Title">硬件体检台</sys:String>
+    <sys:String x:Key="Nav.Detection">硬件检测</sys:String>
+    <sys:String x:Key="Nav.Benchmark">性能跑分</sys:String>
+    <sys:String x:Key="Nav.History">历史结果</sys:String>
+    <sys:String x:Key="Detection.Start">开始检测</sys:String>
+    <sys:String x:Key="Detection.Export">导出 JSON</sys:String>
+    <sys:String x:Key="Detection.Sections">检测报告</sys:String>
+    <sys:String x:Key="Placeholder.Benchmark">性能跑分将在 M2 里程碑启用</sys:String>
+    <sys:String x:Key="Placeholder.History">历史结果将在 M3 里程碑启用</sys:String>
+</ResourceDictionary>
