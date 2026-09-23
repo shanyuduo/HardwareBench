@@ -4,7 +4,7 @@ namespace HardwareBench.App.ViewModels;
 
 public partial class MainViewModel(
     DetectionViewModel detection,
-    PlaceholderViewModel benchmark,
+    BenchmarkViewModel benchmark,
     PlaceholderViewModel history) : ObservableObject
 {
     public IReadOnlyList<NavEntry> Nav { get; } =

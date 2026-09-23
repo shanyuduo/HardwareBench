@@ -1,0 +1,26 @@
+﻿
+7-Zip (r) 26.02 (x86) : Igor Pavlov : Public domain : 2026-06-25
+
+Compiler:  MSC 1200.12008804
+Windows 10.0 22631
+x86 6.9702 threads:24 4GB - x64 6.9702 threads:24 4GB f:5F310F2774C
+12th Gen Intel(R) Core(TM) i7-12800HX
+(90672 : Intel64 Family 6 Model 151 Stepping 2) (34->34) 2304 MHz
+
+1T CPU Freq (MHz):  4105  4102  4027  4069  4053  4067  4068
+12T CPU Freq (MHz): 666% 3548   570% 3588  
+24T CPU Freq (MHz): 1512% 2621   1501% 2515  
+
+RAM size:    4095 MB,  # CPU hardware threads:  24
+RAM usage:   2735 MB,  # Benchmark threads:     24
+
+                       Compressing  |                  Decompressing
+Dict     Speed Usage    R/U Rating  |      Speed Usage    R/U Rating
+         KiB/s     %   MIPS   MIPS  |      KiB/s     %   MIPS   MIPS
+
+22:      71186  1340   5168  69250  |     631077  1822   2953  53806
+23:      64958  1329   4981  66185  |     640952  1899   2920  55444
+24:      62936  1330   5089  67669  |     606664  1857   2867  53230
+----------------------------------  | ------------------------------
+Avr:     66360  1333   5079  67701  |     626231  1859   2913  54160
+Tot:            1596   3996  60931

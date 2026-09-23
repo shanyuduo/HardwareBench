@@ -1,0 +1,137 @@
+{
+  "StartedAtUtc": "2026-08-17T18:32:31.295731+00:00",
+  "Environment": {
+    "PowerScheme": "\u5E73\u8861",
+    "BackgroundCpuPercent": 50.94760312151616,
+    "ToolVersions": "DiskSpd v2.2; 7-Zip 7zr (bundled); STREAM 5.10 Windows-variant"
+  },
+  "Metrics": [
+    {
+      "Id": "disk-seq-read",
+      "Category": "Disk",
+      "Unit": "MiB/s",
+      "Value": 3353.75,
+      "Score": 479,
+      "AllRuns": [
+        3544.07,
+        3353.75,
+        3243.74
+      ]
+    },
+    {
+      "Id": "disk-seq-iops",
+      "Category": "Disk",
+      "Unit": "IOPS",
+      "Value": 3353.75,
+      "AllRuns": [
+        3544.07,
+        3353.75,
+        3243.74
+      ]
+    },
+    {
+      "Id": "disk-4k-read",
+      "Category": "Disk",
+      "Unit": "MiB/s",
+      "Value": 291.11,
+      "Score": 728,
+      "AllRuns": [
+        287.83,
+        291.11,
+        299.13
+      ]
+    },
+    {
+      "Id": "disk-4k-iops",
+      "Category": "Disk",
+      "Unit": "IOPS",
+      "Value": 74525.14,
+      "AllRuns": [
+        73685,
+        74525.14,
+        76577.8
+      ]
+    },
+    {
+      "Id": "cpu-7z-rating",
+      "Category": "Cpu",
+      "Unit": "MIPS",
+      "Value": 52635,
+      "Score": 526,
+      "AllRuns": [
+        40721,
+        54666,
+        52635
+      ]
+    },
+    {
+      "Id": "cpu-7z-compress",
+      "Category": "Cpu",
+      "Unit": "MIPS",
+      "Value": 59664,
+      "AllRuns": [
+        41246,
+        61172,
+        59664
+      ]
+    },
+    {
+      "Id": "cpu-7z-decompress",
+      "Category": "Cpu",
+      "Unit": "MIPS",
+      "Value": 45606,
+      "AllRuns": [
+        40197,
+        48161,
+        45606
+      ]
+    },
+    {
+      "Id": "mem-triad",
+      "Category": "Memory",
+      "Unit": "MB/s",
+      "Value": 18765.2,
+      "Score": 235,
+      "AllRuns": [
+        19418.6,
+        18765.2,
+        18402.4
+      ]
+    },
+    {
+      "Id": "mem-copy",
+      "Category": "Memory",
+      "Unit": "MB/s",
+      "Value": 23346.4,
+      "AllRuns": [
+        22866.6,
+        23687.2,
+        23346.4
+      ]
+    },
+    {
+      "Id": "mem-scale",
+      "Category": "Memory",
+      "Unit": "MB/s",
+      "Value": 16729.1,
+      "AllRuns": [
+        17831.1,
+        16494.3,
+        16729.1
+      ]
+    },
+    {
+      "Id": "mem-add",
+      "Category": "Memory",
+      "Unit": "MB/s",
+      "Value": 19420.8,
+      "AllRuns": [
+        19420.8,
+        18863.5,
+        19865.7
+      ]
+    }
+  ],
+  "Errors": [],
+  "TotalScore": 456
+}
